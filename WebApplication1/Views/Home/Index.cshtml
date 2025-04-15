@@ -1,33 +1,94 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model WebApplication1.Models.ViewModel.HomeProductVM
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<style type="text/css">
+    #home-banner {
+        background-image: url("../Content/images/banner.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+    .home-banner-content {
+        text-align: center;
+        color: white;
+    }
+
+        .home-banner-content h2 {
+            font-size: 34px;
+        }
+
+        .home-banner-content p {
+            font-size: 24px;
+        }
+
+        .home-banner-content a {
+            font-size: 24px;
+            text-decoration: none;
+            color: white;
+        }
+
+    #featureProd {
+        text-align: center;
+    }
+
+        #featureProd h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+    .prod-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .product-item {
+        width: 200px;
+    }
+
+        .product-item h3 {
+            font-size: 16px;
+            margin: 10px 0px;
+        }
+
+    .product-description {
+        font-size: 16px;
+        color: #808080;
+    }
+
+    .product-price {
+        font-weight: bold;
+        font-size: 12px;
+        color: black;
+    }
+</style>
+
+<section id="home-banner">
+    <div class="home-banner-content">
+        <h2>Chào mừng bạn đến với trang trại gà của chúng tôi</h2>
+        <p>Hàng ngàn món ngon từ gà đang chờ đón bạn</p>
+        <a href="#" class="btn">Bắt đầu mua sắm</a>
     </div>
-</main>
+</section>
+<section class="container-fluid search-Prod">
+    <h2>Tìm kiếm sản phẩm</h2>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+
+        <div class="form-group search-container d-flex gap-1 justify-content-center">
+            @Html.TextBoxFor(m => m.SearchTerm, new
+       {
+           @class = "form-control",
+           placeholder = "Nhập tên, mô tả hoặc danh mục sản phẩm"
+       })
+            <button type="submit" class="search-button btn btn-primary">Tìm kiếm</button>
+        </div>
+
+
+    }
+</section>
+@Html.Partial("PV_FeatureProduct", Model)
+@Html.Partial("PV_NewProduct", Model)

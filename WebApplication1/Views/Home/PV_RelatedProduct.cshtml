@@ -1,0 +1,39 @@
+﻿@model WebApplication1.Models.ViewModel.ProductDetailsVM
+@using PagedList.Mvc
+
+<style>
+    .feature-container, .list-container {
+        list-style-type: none;
+    }
+        .feature-container .fproduct-item img, .list-container .lproduct-item img {
+            max-width: 100%;
+        }
+    .lproduct-item, .fproduct-item {
+        border: 1px solid #666;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 10px 5px;
+    }
+</style>
+@if (Model.RelatedProducts != null && Model.RelatedProducts.Any())
+{
+    <section class="container-fluid featureProd">
+        <h4>Sản phẩm tương tự</h4>
+        <ul class="feature-container d-flex">
+            @foreach (var product in Model.RelatedProducts)
+            {
+                <li class="fproduct-item">
+                    <div>
+                        <a href="@Url.Action("ProductDetail", "Home", new {id = product.ProductID})">
+                            <img src="@Html.DisplayFor(modelItem => product.ProductImage)" />
+                        </a>
+                    </div>
+                    <div>
+                        <p>@Html.DisplayFor(modelItem => product.ProductName)</p>
+                        <p>@Html.DisplayFor(modelItem => product.ProductPrice)</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </section>
+}
