@@ -128,6 +128,7 @@
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -174,9 +175,12 @@
     <Compile Include="Models\ViewModel\Cart.cs" />
     <Compile Include="Models\ViewModel\CartItem.cs" />
     <Compile Include="Models\ViewModel\CartService.cs" />
+    <Compile Include="Models\ViewModel\Customer.cs" />
     <Compile Include="Models\ViewModel\HomeProductVM.cs" />
     <Compile Include="Models\ViewModel\ProductDetailsVM.cs" />
     <Compile Include="Models\ViewModel\ProductSearchVM.cs" />
+    <Compile Include="Models\ViewModel\RegisterVM.cs" />
+    <Compile Include="Models\ViewModel\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +275,9 @@
     <Content Include="Views\Home\PV_RelatedProduct.cshtml" />
     <Content Include="Views\Home\ProductDetail.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ProfileInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
