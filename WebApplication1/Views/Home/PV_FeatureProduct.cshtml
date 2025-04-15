@@ -1,0 +1,42 @@
+﻿@model WebApplication1.Models.ViewModel.HomeProductVM
+<style>
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* khoảng cách giữa các sản phẩm */
+    }
+
+    .product-item {
+        width: calc(33.333% - 20px); /* 3 sản phẩm mỗi hàng (trừ đi khoảng cách nếu có) */
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+</style>
+
+@if(Model.FeaturedProducts != null && Model.FeaturedProducts.Any())
+            {
+               <section class="feature-container">
+                   <h2>Sản phẩm nổi bật</h2>
+                   <div class="product-container d-flex flex-wrap">
+                       @foreach (var product in Model.FeaturedProducts)
+                       {
+                           <div class="product-item">
+                               <div>
+                                   <a href="@Url.Action("ProductDetail", "Home", new {id = product.ProductID})">
+                                       <img src="@Html.DisplayFor(modelItem => product.ProductImage)" />
+                                   </a>
+                               </div>
+                               <div>
+                                   <p>@Html.DisplayFor(modelItem => product.ProductPrice)</p>
+                                   <p>@Html.DisplayFor(modelItem => product.ProductName)</p>
+                                   <p>@Html.DisplayFor(modelItem => product.Category.CategoryName)</p>
+                                   <p>Đãn bán: @Html.DisplayFor(modelItem => product.OrderDetails.Count)</p>
+                               </div>
+                           </div>
+                       }
+                   </div>
+               </section>
+               <hr />
+            }
