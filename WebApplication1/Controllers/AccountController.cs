@@ -3,6 +3,7 @@ using WebApplication1.Models.ViewModel;
 using WebApplication1.Models;
 using System.Linq;
 using System.Data.Entity.Validation;
+using System.Web.Security;
 
 namespace WebApplication1.Controllers
 {
@@ -74,6 +75,44 @@ namespace WebApplication1.Controllers
             }
 
             return View(model);
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Account/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = db.Users.SingleOrDefault(u =>
+                u.Username == model.Username &&
+                u.Password == model.Password &&
+                u.UserRole == "Customer"
+            );
+
+            if (user != null)
+            {
+                // Lưu trạng thái đăng nhập vào session
+                Session["Username"] = user.Username;
+                Session["UserRole"] = user.UserRole;
+
+                // Lưu thông tin xác thực người dùng vào cookie
+                FormsAuthentication.SetAuthCookie(user.Username, false);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
+                return View(model);
+            }
         }
     }
 }
